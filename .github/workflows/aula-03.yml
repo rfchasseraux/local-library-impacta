@@ -11,13 +11,14 @@ on:
     
 env:
   WORKFLOW_VAR: 'minha variavel no escopo do workflow'
-  NODE_VERSION: 12
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    env:
+      NODE_VERSION: 12
+      JOB_VAR: 'minha variavel no escopo do job'
+      
     steps:
     
     - name: Checkout
@@ -28,6 +29,13 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
         
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - name: 1- Step com variável de ambiente
+      env:
+        STEP_VAR: 'minha variavel no escopo do step'
+      run: echo $STEP_VAR
+      
+    - name: 2- Step com variável de ambiente
+      run: echo $STEP_VAR
+      
+    - run: echo $JOB_VAR
+    - run: echo $WORKFLOW_VAR
