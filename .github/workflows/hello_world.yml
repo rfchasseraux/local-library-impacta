@@ -9,16 +9,18 @@ on:
   workflow_dispatch:
 
 jobs:
-  hello-world:
+  job1:
+    name: Primeiro Job
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      - name: Run a multi-line script
-        run: |
-          echo Adiciona outras Actions no build do projeto
-          echo Imprime linha separada
+      - name: Passo 1
+        run: env | sort
+  
+  job2:
+    name: Segundo Job
+    runs-on: windows-latest
+    
+    steps:
+      - name: Passo 1
+        run: "Get-ChildItem Env: | Sort-Object Name"
