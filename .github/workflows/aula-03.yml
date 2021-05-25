@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Aula 03
 
 on:
   push:
@@ -32,8 +32,8 @@ jobs:
     - name: "Configure AWS Credentials"
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: AKIASKRKBSHR2ZKSALMF
-        aws-secret-access-key: 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
+        aws-access-key-id: ${{ secrets.AWS_ACESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
         
