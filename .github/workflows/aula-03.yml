@@ -29,13 +29,11 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
         
-    - name: 1- Step com variável de ambiente
-      env:
-        STEP_VAR: 'minha variavel no escopo do step'
-      run: echo $STEP_VAR
-      
-    - name: 2- Step com variável de ambiente
-      run: echo $STEP_VAR
-      
-    - run: echo $JOB_VAR
-    - run: echo $WORKFLOW_VAR
+    - name: "Configure AWS Credentials"
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: AKIASKRKBSHR2ZKSALMF
+        aws-secret-access-key: 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
+        aws-region: us-east-1
+
+        
