@@ -42,12 +42,12 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.10.9 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: app-impacta-pedrolacerda-hom
-          heroku_email: pedrohrl1@gmail.com
+          heroku_app_name: app-impacta-rfchasseraux-hom
+          heroku_email: rfchasseraux@gmail.com
           justlogin: true
       
       - name: Set Heroku remote
-        run: heroku git:remote -a app-impacta-pedrolacerda-hom
+        run: heroku git:remote -a app-impacta-rfchasseraux-hom
       
       - name: Set env variables
         run: |
@@ -74,12 +74,12 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.10.9 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: app-impacta-pedrolacerda
-          heroku_email: pedrohrl1@gmail.com
+          heroku_app_name: app-impacta-rfchasseraux
+          heroku_email: rfchasseraux@gmail.com
           justlogin: true
       
       - name: Set Heroku remote
-        run: heroku git:remote -a app-impacta-pedrolacerda
+        run: heroku git:remote -a app-impacta-rfchasseraux
       
       - name: Set env variables
         run: |
