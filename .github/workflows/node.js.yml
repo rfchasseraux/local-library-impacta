@@ -25,11 +25,10 @@ jobs:
     - run: npm run build --if-present
     - run: npm test --if-present
   
-  deploy:
+  deploy-homologacao:
     runs-on: ubuntu-latest
     env:
-      DB_URI: $${{ secrets.DB_URI }}
-      NODE_ENV: production
+      DB_URI: ${{ secrets.DB_URI }}
       
     needs: [build]
     steps:
@@ -43,12 +42,44 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.10.9 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: app-impacta-rfchasseraux
-          heroku_email: rfchasseraux@gmail.com
+          heroku_app_name: app-impacta-pedrolacerda-hom
+          heroku_email: pedrohrl1@gmail.com
           justlogin: true
       
       - name: Set Heroku remote
-        run: heroku git:remote -a app-impacta-rfchasseraux
+        run: heroku git:remote -a app-impacta-pedrolacerda-hom
+      
+      - name: Set env variables
+        run: |
+          heroku config:set MONGODB_URI=${{ env.DB_URI }}
+      
+      - name: Push code to Heroku
+        run: git push heroku main
+
+  deploy-producao:
+    runs-on: ubuntu-latest
+    env:
+      DB_URI: $${{ secrets.DB_URI }}
+      NODE_ENV: production
+      
+    needs: [deploy-homologacao]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          # Full git history is needed to build on Heroku
+          fetch-depth: 0
+      
+      - name: Login Heroku
+        uses: akhileshns/heroku-deploy@v3.10.9 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: app-impacta-pedrolacerda
+          heroku_email: pedrohrl1@gmail.com
+          justlogin: true
+      
+      - name: Set Heroku remote
+        run: heroku git:remote -a app-impacta-pedrolacerda
       
       - name: Set env variables
         run: |
