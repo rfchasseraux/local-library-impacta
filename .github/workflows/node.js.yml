@@ -63,6 +63,7 @@ jobs:
       NODE_ENV: production
       
     needs: [deploy-homologacao]
+    environment: producao
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
